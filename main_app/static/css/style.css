@@ -1,0 +1,15 @@
+.primary { 
+    background: rgb(244, 112, 65);
+}
+.color-primary {
+    color:rgb(244, 112, 65);
+}
+.color-secondary {
+    color: rgb(77, 85, 93);
+}
+.fa-solid { 
+    color: rgb(77, 85, 93);
+}
+.offcanvas { 
+    background: rgb(77, 85, 93); 
+}

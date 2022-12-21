@@ -2,11 +2,23 @@
 
 
 {% block content %}
-    <h1>Index page</h1>
-    
+<h1 class="color-primary fs-1 my-5">Birds Seen</h1>
+<div class="row">
     {% for bird in birds %}
-        <li>{{ bird.species }}</li>
+    <div class="col-sm-6">
+    <div class="card my-3">
+        <img src="" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ bird.species }}</h5>
+            <p class="card-text">{{ bird.description }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Location: {{ bird.location }}</li>
+            <li class="list-group-item">Number seen: {{ bird.number }}</li>
+        </ul>
+    </div>
+    </div>
     {% endfor %}
-        
+</div>
+
 {% endblock content %}
-    
