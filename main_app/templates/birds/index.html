@@ -6,17 +6,19 @@
 <div class="row">
     {% for bird in birds %}
     <div class="col-sm-6">
-    <div class="card my-3">
-        <img src="" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">{{ bird.species }}</h5>
-            <p class="card-text">{{ bird.description }}</p>
+        <div class="card my-3">
+            <img src="" class="card-img-top" alt="...">
+            <div class="card-body">
+                <a class="text-decoration-none" href="{% url 'show' bird.id %}">
+                    <h5 class="card-title color-primary">{{ bird.species }}</h5>
+                </a>
+                <p class="card-text color-secondary">{{ bird.description }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item color-secondary">Location: {{ bird.location }}</li>
+                <li class="list-group-item color-secondary">Number seen: {{ bird.number }}</li>
+            </ul>
         </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Location: {{ bird.location }}</li>
-            <li class="list-group-item">Number seen: {{ bird.number }}</li>
-        </ul>
-    </div>
     </div>
     {% endfor %}
 </div>

@@ -1,20 +1,7 @@
 from django.shortcuts import render
-
-
-class Bird:  
-  def __init__(self, species, location, description, number):
-    self.species = species
-    self.location = location
-    self.description = description
-    self.number = number
-
-birds = [
-  Bird('Cinnamon Teal', 'Cleveland National Forest, CA', 'Two females and one male seen feeding in a shallow pond', 3),
-  Bird('Mourning Dove', 'Tulsa, Oklahoma', 'Group of doves spotted on the telephone pole in my neighborhood', 8),
-  Bird('Chimney Swift', 'Greensboro, SC', 'Sighted flying over the river', 4),
-  Bird('Ruby-throated Hummingbird', 'St Cloud, MN', 'Several birds have begun visiting our feeder', 6),
-]
-
+from .models import Bird
+# import class-based views 
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # Create your views here.
 def home(request): 
     return render(request, 'home.html')
@@ -23,5 +10,22 @@ def about(request):
     return render(request, 'about.html')
 
 def birds_index(request): 
-    #key in the dictionary is the variable name in the template 
-    return render(request, 'birds/index.html', {'birds' : birds})
+  birds = Bird.objects.all()
+  #key in the dictionary is the variable name in the template 
+  return render(request, 'birds/index.html', {'birds' : birds})
+
+def bird_show(request, bird_id): 
+  bird = Bird.objects.get(id=bird_id)
+  return render(request, 'birds/show.html', {'bird' : bird})
+
+# class based view (create)
+
+class BirdCreate(CreateView): 
+  model = Bird
+  fields = '__all__'
+class BirdUpdate(UpdateView): 
+  model = Bird
+  fields = ['location', 'description', 'number']
+class BirdDelete(DeleteView): 
+  model = Bird 
+  success_url = '/birds/'

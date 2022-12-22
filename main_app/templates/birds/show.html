@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card my-3">
+	<div class="card-body">
+		<h3 class="card-title color-primary">{{ bird.species }}</h3>
+		<p class="card-tex color-secondary">Location: {{ bird.location }}</p>
+		<p class="card-text color-secondary">Description: {{ bird.description }}</p>
+        <p class="card-text color-secondary">Number seen: {{ bird.number }}</p>
+        <div class="card-action">
+            <a class="btn btn-sm btn-light" href="{% url 'bird_update' bird.id %}">Edit</a>
+            <a class="btn btn-sm btn-danger" href="{% url 'bird_delete' bird.id %}">Delete</a>
+        </div>
+	</div>
+</div>
+{% endblock content %}
+    

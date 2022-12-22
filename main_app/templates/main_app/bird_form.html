@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="container col-8-sm ">
+
+{% if object %}
+    <h1 class="color-primary my-4">Edit <span>{{ object.species }}</span></h1>
+{% else %}
+    <h1 class="color-primary my-4">Create Bird</h1>
+{% endif %}
+    
+<!-- leaving the action blank makes the form submit to the same url used to display the form -->
+    <form action="" method="post" class="form-group">
+        <!-- all django forms need a cross site request forgery token  -->
+        {% csrf_token %}
+        <ul class="list-group list-group-flush">
+            {% for field in form %}
+    <li class="list-group-item">
+        {{ field.label_tag }} {{ field }}
+    </li>
+{% endfor %}
+        </ul>
+        <input type="submit" vlaue="Submit" class="btn btn-light">
+    </form>
+</div>
+{% endblock content %}
