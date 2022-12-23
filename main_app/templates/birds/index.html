@@ -12,12 +12,7 @@
                 <a class="text-decoration-none" href="{% url 'show' bird.id %}">
                     <h5 class="card-title color-primary">{{ bird.species }}</h5>
                 </a>
-                <p class="card-text color-secondary">{{ bird.description }}</p>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item color-secondary">Location: {{ bird.location }}</li>
-                <li class="list-group-item color-secondary">Number seen: {{ bird.number }}</li>
-            </ul>
         </div>
     </div>
     {% endfor %}

@@ -1,17 +1,64 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="card my-3">
-	<div class="card-body">
-		<h3 class="card-title color-primary">{{ bird.species }}</h3>
-		<p class="card-tex color-secondary">Location: {{ bird.location }}</p>
-		<p class="card-text color-secondary">Description: {{ bird.description }}</p>
-        <p class="card-text color-secondary">Number seen: {{ bird.number }}</p>
-        <div class="card-action">
-            <a class="btn btn-sm btn-light" href="{% url 'bird_update' bird.id %}">Edit</a>
-            <a class="btn btn-sm btn-danger" href="{% url 'bird_delete' bird.id %}">Delete</a>
+<div class="container">
+    <div class="row">
+        <div class="card my-3 col-sm-7">
+            <div class="card-body">
+                <h3 class="card-title color-primary">{{ bird.species }}</h3>
+                <p class="card-text text-muted color-secondary">{{ bird.get_migratory_display }}</p>
+                <p class="card-text color-secondary">Description: {{ bird.description }}</p>
+                <div class="card-action">
+                    <a class="btn btn-sm btn-light" href="{% url 'bird_update' bird.id %}">Edit</a>
+                    <a class="btn btn-sm btn-danger" href="{% url 'bird_delete' bird.id %}">Delete</a>
+                </div>
+            </div>
         </div>
-	</div>
+        <div class="card m-3 col-sm-4">
+            <h4 class="card-title color-primary my-2">Add {{ bird.species }} sighting</h3>
+            <form class="m-3" action="{% url 'add_sighting' bird.id %}" method="post">
+                {% csrf_token %}
+                {{ sighting_form.as_p }}
+                <br>
+                <input type="submit" class="btn btn-light" value="Add Sighting">
+            </form>
+
+        </div>
+    </div>
+
+    <div>
+
+    </div>
 </div>
+<h2 class="color-primary">{{ bird.species }} Sightings:</h2>
+{% for sighting in bird.sighting_set.all %}
+<div class="accordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading{{ sighting.id }}">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapse{{ sighting.id }}" aria-expanded="false"
+                aria-controls="collapse{{ sighting.id }}">
+                {{ sighting.date }}
+            </button>
+        </h2>
+        <div id="collapse{{ sighting.id }}" class="accordion-collapse collapse"
+            aria-labelledby="heading{{ sighting.id }}">
+            <div class="accordion-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        {{ sighting.time }}
+                    </li>
+                    <li class="list-group-item">
+                        {{ sighting.behavior }}
+                    </li>
+                    <li class="list-group-item">
+                        Number Seen: {{ sighting.number }}
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
 {% endblock content %}
-    

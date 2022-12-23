@@ -13,3 +13,11 @@
 .offcanvas { 
     background: rgb(77, 85, 93); 
 }
+textarea { 
+     width: 100%; 
+     height: 20vh;
+}
+
+#id_number { 
+    width: 30%;
+}
