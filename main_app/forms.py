@@ -7,8 +7,6 @@ class DateInput(forms.DateInput):
 class TimeInput(forms.TimeInput): 
     input_type = 'time'
 
-    
-
 class SightingForm(ModelForm): 
     class Meta: 
         model = Sighting

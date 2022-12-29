@@ -16,12 +16,12 @@
         </div>
         <div class="card m-3 col-sm-4">
             <h4 class="card-title color-primary my-2">Add {{ bird.species }} sighting</h3>
-            <form class="m-3" action="{% url 'add_sighting' bird.id %}" method="post">
-                {% csrf_token %}
-                {{ sighting_form.as_p }}
-                <br>
-                <input type="submit" class="btn btn-light" value="Add Sighting">
-            </form>
+                <form class="m-3" action="{% url 'add_sighting' bird.id %}" method="post">
+                    {% csrf_token %}
+                    {{ sighting_form.as_p }}
+                    <br>
+                    <input type="submit" class="btn btn-light" value="Add Sighting">
+                </form>
 
         </div>
     </div>
@@ -54,8 +54,8 @@
                     <li class="list-group-item">
                         Number Seen: {{ sighting.number }}
                     </li>
-
                 </ul>
+
             </div>
         </div>
     </div>
