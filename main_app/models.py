@@ -15,9 +15,9 @@ class Bird(models.Model):
 
     def get_absolute_url(self):   
         return reverse('show', kwargs={'bird_id': self.id})
-        
+
 class Location(models.Model):
-    location = LocationField()
+    location = LocationField(map_attrs={"zoom": 3, "center": [-103.5169725, 38.0354497]})
     description = models.TextField(max_length=200)
     birds = models.ManyToManyField(Bird)
     def get_absolute_url(self):
