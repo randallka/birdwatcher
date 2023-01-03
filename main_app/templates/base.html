@@ -1,7 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,17 +9,15 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="https://kit.fontawesome.com/267532a2de.js" crossorigin="anonymous"></script>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
-<link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
-
-    <title>BirdWatcher</title>
-</head>
+    
+    {% block head %}
+        
+    {% endblock head %}
+    </head>
 
 <body>
 
-</body>
-</html>
-    
+
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
@@ -48,6 +45,8 @@
                     <a class="list-group-item link-light my-1" href="/about">About</a>
                     <a class="list-group-item link-light my-1" href="/birds">View Birds</a>
                     <a class="list-group-item link-light my-1" href="{% url 'birds_create' %}">New Bird</a>
+                    <a class="list-group-item link-light my-1" href="{% url 'location_index' %}">View All Locations</a>
+                    <a class="list-group-item link-light my-1" href="{% url 'locations_create' %}">Add a Location</a>
                 </ul>
             </div>
         </div>
@@ -59,5 +58,4 @@
         {% endblock content %}
     </div>
 </body>
-
 </html>

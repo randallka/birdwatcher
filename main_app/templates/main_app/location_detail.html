@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+
+<style>
+    #map {
+        height: 30vh;
+        width: 100%;
+    }
+</style>
+{% endblock head %}
+
+{% block content %}
+<div class="row">
+    <div class="container my-3">
+        <div class="card">
+            <h1 class="card-title fs-2 color-primary">{{ location.description }}</h1>
+            <div class="card-body" id="map"></div>
+            <p class="card-body">Birds seen at this location:</p>
+            <ul class="list-group list-group-flush list-group-horizontal-sm">
+
+                {% for bird in location.birds.all %}
+                <li class="list-group-item">{{ bird.species }}</li>
+                {% endfor %}
+
+            </ul>
+            <div class="card-text m-1">
+                <div class="d-inline-block">
+                    <form action="{% url 'locations_update' location.id %}" method="get">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-info d-inline">Edit Location</button>
+                    </form>
+                </div>
+                <div class="d-inline-block">
+                    <form action="{% url 'locations_delete' location.id %}" method="get">
+                        {% csrf_token %}
+                        <button href="{% url 'locations_delete' location.id %}" class="btn btn-danger d-inline">Delete Location</button>
+                    </form>
+                </div>
+                    
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="card">
+        <h2 class="card-title p-2">Change birds found at this location:</h2>
+        <ul class="list-group list-group-horizontal text-center">
+
+            {% for bird in bird_list %}
+
+            {% if bird in location.birds.all %}
+            <li class="list-group-item">{{ bird.species }}
+                <form action="{% url 'remove_bird' location.id bird.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                </form>
+                </li>
+                {% else %}
+            <li class="list-group-item">{{ bird.species }}
+                <form action="{% url 'assoc_bird' location.id bird.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-info">Add</button>
+                </form>
+            </li>
+                {% endif %}
+                {% endfor %}
+
+        </ul>
+    </div>
+</div>
+
+<div class="hidden opacity-0">
+    <p>{{ location.location }}</p>
+</div>
+
+<script>
+    let locationText = document.querySelector(".hidden").innerText
+    locationText = locationText.substr(1).slice(0, -1);
+    const locationArray = locationText.split(", ")
+    mapboxgl.accessToken = 'pk.eyJ1IjoicmFuZGFsbGthIiwiYSI6ImNsYzEyYTA0ZTN6cnYzdnBsY2kxbnQxeHcifQ.UXuG6o9McGmzc24bhWF44A';
+    const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [locationArray[0], locationArray[1]],
+        zoom: 8
+    });
+
+    const marker1 = new mapboxgl.Marker({ color: 'red' })
+        .setLngLat([locationArray[0], locationArray[1]])
+        .addTo(map);
+
+    map.on('load', function () {
+        map.resize();
+    });
+</script>
+{% endblock content %}

@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 from .models import Sighting
+from .models import Location
 # instantiating this class will create a form from our feeding model
 class DateInput(forms.DateInput):
     input_type = 'date'

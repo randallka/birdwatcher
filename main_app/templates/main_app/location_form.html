@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+<style>
+    #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+    }
+</style>
+<title>BirdWatcher</title>
+{% load mapbox_location_field_tags %}
+{% location_field_includes %}
+{% include_jquery %}
+{% endblock head %}
+    
+{% block content %}
+<div class="container col-8-sm ">
+
+    {% if object %}
+    <h1 class="color-primary my-4">Edit</span></h1>
+    {% else %}
+    <h1 class="color-primary my-4">Create Location</h1>
+    {% endif %}
+
+    <form action="" method="post" class="form-group m-2">
+        {% csrf_token %}
+        <ul class="list-group list-group-flush">
+            {% for field in form %}
+            <li class="list-group-item p-3">
+                {{ field.label_tag }} {{ field }}
+            </li>
+            {% endfor %}
+        </ul>
+        <input type="submit" vlaue="Submit" class="btn btn-light">
+    </form>
+    {{ form.media }}
+</div>
+{% endblock content %}
