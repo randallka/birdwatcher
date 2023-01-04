@@ -2,10 +2,10 @@
 
 
 {% block content %}
-<h1>Location List</h1>
+<h1 class="color-primary fs-1 my-5">Locations</h1>
 
 {% for location in location_list %}
-  <a href="{% url 'locations_show' location.id %}">
+  <a class="text-decoration-none" href="{% url 'locations_show' location.id %}">
     <div class="card">
         <div class="card-body">
             <p class="card-text">{{ location.description }}</p>

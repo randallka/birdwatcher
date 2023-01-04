@@ -16,17 +16,17 @@
 <div class="row">
     <div class="container my-3">
         <div class="card">
-            <h1 class="card-title fs-2 color-primary">{{ location.description }}</h1>
+            <h1 class="card-title fs-3 color-primary p-2">{{ location.description }}</h1>
             <div class="card-body" id="map"></div>
-            <p class="card-body">Birds seen at this location:</p>
-            <ul class="list-group list-group-flush list-group-horizontal-sm">
+            <h3 class="card-body color-secondary">Birds seen at this location:</h3>
+            <ul class="list-group list-group-horizontal-sm">
 
                 {% for bird in location.birds.all %}
-                <li class="list-group-item">{{ bird.species }}</li>
+                <li class="list-group-item"><a class="text-decoration-none" href="{% url 'show' bird.id %}">{{ bird.species }}</a></li>
                 {% endfor %}
 
             </ul>
-            <div class="card-text m-1">
+            <div class="card-text m-1 my-3">
                 <div class="d-inline-block">
                     <form action="{% url 'locations_update' location.id %}" method="get">
                         {% csrf_token %}
