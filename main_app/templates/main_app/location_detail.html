@@ -22,7 +22,8 @@
             <ul class="list-group list-group-horizontal-sm">
 
                 {% for bird in location.birds.all %}
-                <li class="list-group-item"><a class="text-decoration-none" href="{% url 'show' bird.id %}">{{ bird.species }}</a></li>
+                <li class="list-group-item"><a class="text-decoration-none" href="{% url 'show' bird.id %}">{{
+                        bird.species }}</a></li>
                 {% endfor %}
 
             </ul>
@@ -36,10 +37,11 @@
                 <div class="d-inline-block">
                     <form action="{% url 'locations_delete' location.id %}" method="get">
                         {% csrf_token %}
-                        <button href="{% url 'locations_delete' location.id %}" class="btn btn-danger d-inline">Delete Location</button>
+                        <button href="{% url 'locations_delete' location.id %}" class="btn btn-danger d-inline">Delete
+                            Location</button>
                     </form>
                 </div>
-                    
+
             </div>
         </div>
     </div>
@@ -57,16 +59,16 @@
                     {% csrf_token %}
                     <button type="submit" class="btn btn-sm btn-danger">Remove</button>
                 </form>
-                </li>
-                {% else %}
+            </li>
+            {% else %}
             <li class="list-group-item">{{ bird.species }}
                 <form action="{% url 'assoc_bird' location.id bird.id %}" method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-sm btn-info">Add</button>
                 </form>
             </li>
-                {% endif %}
-                {% endfor %}
+            {% endif %}
+            {% endfor %}
 
         </ul>
     </div>

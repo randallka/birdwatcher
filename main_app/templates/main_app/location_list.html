@@ -1,18 +1,15 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 <h1 class="color-primary fs-1 my-5">Locations</h1>
-
 {% for location in location_list %}
-  <a class="text-decoration-none" href="{% url 'locations_show' location.id %}">
+<a class="text-decoration-none" href="{% url 'locations_show' location.id %}">
     <div class="card">
         <div class="card-body">
             <p class="card-text">{{ location.description }}</p>
         </div>
     </div>
-  </a>
+</a>
 {% endfor %}
 
 {% endblock content %}
-    
